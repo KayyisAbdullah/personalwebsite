@@ -1,9 +1,0 @@
-*.docx
-Screenshot_*.png
-.env*
-.vercel/
-assets/
-.github/
-.github/**
-designer-skills-main/
-designer-skills-main/**
