@@ -1,2 +1,6 @@
 .vercel
 .env*
+/designer-skills-main/
+/.vercelignore
+/vercel.json
+.github\skills
