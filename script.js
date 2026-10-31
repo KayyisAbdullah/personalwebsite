@@ -88,6 +88,7 @@ document.querySelectorAll("#experience .experience-list, #credentials .experienc
 });
 
 const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const smallScreenPreference = window.matchMedia("(max-width: 640px)");
 
 const observeVisibility = (element, onChange) => {
   let isIntersecting = false;
@@ -107,6 +108,24 @@ const observeVisibility = (element, onChange) => {
   updateVisibility();
   return updateVisibility;
 };
+
+document.querySelectorAll(".case-motion").forEach((video) => {
+  let isVisible = false;
+  const updatePlayback = () => {
+    if (!isVisible || reducedMotionPreference.matches) {
+      video.pause();
+      return;
+    }
+    video.play().catch((error) => {
+      if (error.name !== "AbortError") console.error("Could not play case study motion:", video.currentSrc, error);
+    });
+  };
+  observeVisibility(video, (visible) => {
+    isVisible = visible;
+    updatePlayback();
+  });
+  reducedMotionPreference.addEventListener("change", updatePlayback);
+});
 
 const motionSliders = document.querySelectorAll(".exploration-motion-frame");
 
@@ -204,7 +223,7 @@ imageSliders.forEach((frame) => {
   };
 
   const updateRotation = () => {
-    if (!isVisible || reducedMotionPreference.matches) {
+    if (!isVisible || reducedMotionPreference.matches || smallScreenPreference.matches) {
       stop();
       return;
     }
@@ -226,6 +245,7 @@ imageSliders.forEach((frame) => {
   });
 
   reducedMotionPreference.addEventListener("change", updateRotation);
+  smallScreenPreference.addEventListener("change", updateRotation);
 });
 
 const parallaxTargets = Array.from(document.querySelectorAll(".hero-visual img, .case-image img"))
@@ -233,7 +253,6 @@ const parallaxTargets = Array.from(document.querySelectorAll(".hero-visual img, 
     element,
     speed: element.closest(".hero-visual") ? 0.07 : 0.035,
   }));
-const smallScreenPreference = window.matchMedia("(max-width: 640px)");
 let parallaxFrame;
 
 const updateParallax = () => {

@@ -280,6 +280,9 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .exploration-grid { grid-template-columns: minmax(0, 1fr); gap: 30px; }
   .exploration-item figure { aspect-ratio: 1.15; margin-bottom: 12px; }
   .exploration-item .exploration-motion-frame { aspect-ratio: 1.15; margin-bottom: 12px; }
+  .exploration-motion-video, .exploration-image-slide { filter: none; transition: opacity .24s ease; }
+  .exploration-motion-video.is-active, .exploration-image-slide.is-active { animation: none; transform: none; filter: none; }
+  .exploration-motion-video.is-leaving, .exploration-image-slide.is-leaving { transform: none; filter: none; }
   .exploration-item h3 { font-size: 18px; }
   .exploration-item p { font-size: 11px; }
   .toolkit-section { padding: 73px 0 80px; }
@@ -302,6 +305,12 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .experience-row h3 { max-width: none; font-size: 14px; }
   .experience-row p, .experience-row time { font-size: 10px; }
   .experience-row time { padding-top: 2px; text-align: right; }
+  #education-panel .experience-row { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  #education-panel .experience-row > div { display: contents; }
+  #education-panel .experience-row h3 { grid-row: 1; font-size: 15px; line-height: 1.35; }
+  #education-panel .experience-row time { grid-row: 2; padding: 0; text-align: left; font-size: 11px; white-space: normal; }
+  #education-panel .experience-row p { grid-row: 3; font-size: 12px; line-height: 1.5; }
+  #education-panel .education-details { grid-row: 4; gap: 7px; margin-top: 5px; padding-left: 18px; font-size: 12px; line-height: 1.5; }
   .experience-details { font-size: 12px; }
   .experience-details summary { font-size: 11px; }
   .contact-section { background-size: 96px 96px; }
