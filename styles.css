@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   --color-ink: #010B13;
   --color-paper: #EBF1F5;
@@ -143,6 +143,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .skill-item p { max-width: 430px; margin: 0; color: rgba(235,241,245,.9); font-size: 15px; line-height: 1.55; }
 
 .experience-section { padding-top: 106px; padding-bottom: 120px; }
+#experience { padding-bottom: 48px; }
+#credentials { padding-top: 48px; }
 .experience-heading { margin-bottom: 45px; }
 .experience-filters { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0 0 24px; padding-bottom: 14px; }
 .experience-filter-button { padding: 0 0 8px; color: var(--color-muted); background: none; border: 0; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font-rounded); font-size: 12px; }
@@ -153,12 +155,28 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .experience-row h3 { margin: 0 0 5px; font: 600 17px/1.3 var(--font-display); }
 .experience-row p { margin: 0; color: var(--color-muted); font-family: var(--font-compact); font-size: 12px; }
 .experience-row time { color: var(--color-muted); font-family: var(--font-compact); font-size: 12px; white-space: nowrap; }
+.education-details { display: grid; gap: 6px; margin: 14px 0 0; padding-left: 19px; color: var(--color-muted); font-size: 13px; line-height: 1.6; }
+.education-details li::marker { color: var(--color-orange); }
 .experience-details { grid-column: 1 / -1; color: var(--color-muted); font-size: 13px; line-height: 1.65; }
 .experience-details summary { width: fit-content; color: var(--color-ink); cursor: pointer; font-family: var(--font-compact); font-size: 12px; }
 .experience-details summary:hover { text-decoration: underline; text-underline-offset: 3px; }
 .experience-details summary:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 4px; }
 .experience-details ul { display: grid; gap: 6px; margin: 12px 0 0; padding-left: 19px; }
 .experience-details li::marker { color: var(--color-orange); }
+.certificate-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-top: 24px; }
+.certificate-card { min-width: 0; overflow: hidden; background: rgba(255,255,255,.48); border: 1px solid var(--color-line); border-radius: 6px; }
+.certificate-preview { display: block; position: relative; overflow: hidden; color: var(--color-paper); }
+.certificate-preview-image { display: block; width: 100%; aspect-ratio: 1.5; object-fit: cover; transition: transform .25s ease; }
+.certificate-preview:hover .certificate-preview-image, .certificate-preview:focus-within .certificate-preview-image { transform: scale(1.035); }
+.certificate-preview-hint { position: absolute; right: 10px; bottom: 10px; min-height: 40px; display: inline-flex; align-items: center; padding: 8px 12px; background: rgba(1,11,19,.82); color: var(--color-paper); border-radius: 3px; font: 600 11px var(--font-compact); text-decoration: none; }
+.certificate-preview-hint:hover { background: var(--color-orange); color: var(--color-ink); }
+.certificate-preview-hint:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; }
+.certificate-card-copy { padding: 15px 16px 17px; }
+.certificate-card-copy h3 { margin: 0 0 5px; font: 600 16px/1.35 var(--font-display); }
+.certificate-card-copy p { margin: 0; color: var(--color-muted); font: 12px/1.5 var(--font-compact); }
+.certificate-card-copy time { color: inherit; font: inherit; white-space: normal; }
+@media (max-width: 900px) { .certificate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .certificate-grid { grid-template-columns: 1fr; gap: 16px; padding-top: 18px; } }
 
 .contact-section { color: var(--color-paper); background-color: var(--color-ink); background-image: linear-gradient(rgba(235,241,245,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(235,241,245,.035) 1px, transparent 1px); background-size: 160px 160px; }
 .contact-inner { width: min(1660px, calc(100% - 13.5%)); padding-top: clamp(82px, 11vw, 156px); padding-bottom: clamp(76px, 9vw, 128px); }
@@ -277,6 +295,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .skill-logo-figma { width: 62px; height: 62px; }
   .skill-logo-wide { width: 108px; height: 62px; }
   .experience-section { padding-top: 74px; padding-bottom: 82px; }
+  #experience { padding-bottom: 38px; }
+  #credentials { padding-top: 42px; }
   .experience-heading { margin-bottom: 29px; }
   .experience-row { min-height: 76px; align-items: start; gap: 10px 12px; padding: 16px 0; }
   .experience-row h3 { max-width: none; font-size: 14px; }

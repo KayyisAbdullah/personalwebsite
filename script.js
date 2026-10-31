@@ -19,7 +19,7 @@ filterButtons.forEach((button) => {
   });
 });
 
-const experienceTabs = document.querySelectorAll(".experience-filter-button");
+const experienceTabs = document.querySelectorAll("#experience .experience-filter-button");
 
 experienceTabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
@@ -43,6 +43,48 @@ experienceTabs.forEach((tab, index) => {
     experienceTabs[nextIndex].focus();
     experienceTabs[nextIndex].click();
   });
+});
+
+const educationTabs = document.querySelectorAll('#credentials .experience-filter-button');
+educationTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    educationTabs.forEach((item) => {
+      const selected = item === tab;
+      item.classList.toggle("is-active", selected);
+      item.setAttribute("aria-selected", String(selected));
+      item.tabIndex = selected ? 0 : -1;
+      document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+    });
+  });
+  tab.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const next = educationTabs[(index + direction + educationTabs.length) % educationTabs.length];
+    next.focus();
+    next.click();
+  });
+});
+
+// Sort each dated content group by its most recent date, newest first.
+const getItemDate = (item) => {
+  const datetime = item.querySelector("time[datetime]")?.dateTime;
+  if (!datetime) return Number.NEGATIVE_INFINITY;
+
+  // A period is stored as start/end, so sort it by the end date.
+  const endDate = datetime.split("/").pop();
+  const match = endDate.match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/);
+  if (!match) return Number.NEGATIVE_INFINITY;
+
+  const [, year, month = "01", day = "01"] = match;
+  return Date.UTC(Number(year), Number(month) - 1, Number(day));
+};
+
+document.querySelectorAll("#experience .experience-list, #credentials .experience-list, #credentials .certificate-grid").forEach((list) => {
+  Array.from(list.children)
+    .map((item, index) => ({ item, index, date: getItemDate(item) }))
+    .sort((a, b) => b.date - a.date || a.index - b.index)
+    .forEach(({ item }) => list.append(item));
 });
 
 const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
