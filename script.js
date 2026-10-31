@@ -1,4 +1,4 @@
-const filterButtons = document.querySelectorAll(".work-filters .filter-button");
+﻿const filterButtons = document.querySelectorAll(".work-filters .filter-button");
 const projectItems = document.querySelectorAll(".case-study[data-category]");
 
 filterButtons.forEach((button) => {
@@ -223,13 +223,13 @@ imageSliders.forEach((frame) => {
   };
 
   const updateRotation = () => {
-    if (!isVisible || reducedMotionPreference.matches || smallScreenPreference.matches) {
+    if (!isVisible || reducedMotionPreference.matches) {
       stop();
       return;
     }
 
     if (intervalId === undefined) {
-      intervalId = window.setInterval(showNextSlide, 2400);
+      intervalId = window.setInterval(showNextSlide, smallScreenPreference.matches ? 3600 : 2400);
     }
   };
 
